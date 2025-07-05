@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Usuario</title>
+    <link rel="stylesheet" href="../css/Usuario.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval';">
+</head>
+<body>
+    <h2>Registrar Usuario</h2>
+    <form id="usuarioForm">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="contrasena" placeholder="Contraseña" required>
+        <select id="rol" name="rol" required>
+            <option value="">-- Seleccione un rol --</option>
+            <option value="Usuario">Usuario</option>
+            <option value="Administrador">Administrador</option>
+        </select>
+        <button type="submit" id="btnGuardar">Enviar</button>
+    </form>
+    <script src="../js/Usuario.js"></script>
+</body>
+</html>

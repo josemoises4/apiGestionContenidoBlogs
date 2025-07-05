@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crear Artículo</title>
+  <link rel="stylesheet" href="../css/articulo.css" />
+</head>
+<body>
+
+    <header>
+    <div id="usuarioLogueado" class="usuario-fijo"></div>
+    </header>
+  
+  <h2>Crear publicación</h2>
+  <p id="categoriaElegida" class="categoria"></p>
+
+  <form id="formArticulo" enctype="multipart/form-data">
+    <input type="text" id="titulo" placeholder="Título del artículo" required><br><br>
+    <label for="imagen" class="custom-file-upload">📷 Seleccionar imagen</label>
+    <input type="file" id="imagen" accept="image/*" style="display:none;" />
+    <div id="previewImagen" class="preview"></div><br>
+    
+    <textarea id="contenido" placeholder="Contenido del artículo" required></textarea><br><br>
+    <button type="submit">Publicar</button>
+  </form>
+
+  <script src="../js/articulo.js"></script>
+</body>
+</html>

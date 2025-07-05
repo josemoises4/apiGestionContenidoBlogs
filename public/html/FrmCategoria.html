@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seleccionar o Crear Categoría</title>
+  <link rel="stylesheet" href="../css/categoria.css" />
+</head>
+<body>
+
+  <header>
+    <div id="usuarioLogueado" style="text-align:right; padding:10px; font-weight:bold;"></div>
+  </header>
+  
+  <h2>Elige o crea una categoría</h2>
+
+  <form id="formulario">
+    <!-- 🔧 CAMBIO: contenedor donde se insertarán los botones de opción -->
+    <div id="radioCategorias"></div>
+
+    <!-- Campo visible solo si elige "Otra..." -->
+    <div id="nuevaCategoriaDiv" style="display:none;">
+      <input type="text" id="nuevaCategoria" placeholder="Nueva categoría" />
+    </div>
+
+    <button type="submit" id="btnGuardar">Enviar</button>
+  </form>
+
+  <script src="../js/categoria.js"></script>
+</body>
+</html>

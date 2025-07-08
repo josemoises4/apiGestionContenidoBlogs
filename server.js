@@ -24,7 +24,7 @@ app.use('/uploads', express.static('uploads'));
 conectar();
 
 // Usar las rutas
-app.use("/api/usuarios", usuarioRoutes);
+app.use("/api/usuario", usuarioRoutes);
 app.use("/", inicioRoutes);
 app.use("/api/login", authRoutes);
 app.use("/api/categoria", categoriaRoutes);

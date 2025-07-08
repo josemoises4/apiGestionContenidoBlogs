@@ -5,7 +5,18 @@ const Comentario = require('../model/Comentario')
 
 // Ruta para agregar un nuevo Comentario
 router.post("/", async (req, res) => {
-    console.log("Datos recibidos:",req.body);
+    const { articulo_id, contenido, usuario_id } = req.body;
+
+    console.log("Datos recibidos:", req.body);
+
+    if (!articulo_id || !contenido || !usuario_id) {
+        return res.status(400).json({ error: "Faltan datos requeridos (articulo_id, contenido, usuario_id)." });
+    }
+
+    if (!require('mongoose').Types.ObjectId.isValid(articulo_id)) {
+        return res.status(400).json({ error: "El articulo_id no es un ObjectId válido." });
+    }
+
     const resultado = await agregar(req.body);
     res.json(resultado);
 });
@@ -56,8 +67,14 @@ router.delete("/:id", async (req, res) => {
 
 // Obtener comentarios de un artículo específico
 router.get("/articulo/:id", async (req, res) => {
+  const { id } = req.params;
+
+  if (!id || !require('mongoose').Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "ID de artículo inválido o no proporcionado." });
+  }
+
   try {
-    const comentarios = await Comentario.find({ articulo_id: req.params.id })
+    const comentarios = await Comentario.find({ articulo_id: id })
       .populate("usuario_id", "nombre")
       .sort({ fecha_publicacion: -1 });
 

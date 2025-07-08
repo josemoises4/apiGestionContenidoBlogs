@@ -1,3 +1,10 @@
+// Redireccionar al login si no hay usuario logueado
+const usuarioLogueado = JSON.parse(localStorage.getItem("usuario"));
+if (!usuarioLogueado || !usuarioLogueado._id) {
+  alert("Acceso no autorizado. Redirigiendo al login...");
+  window.location.href = "login.html"; // o la ruta correcta según tu estructura
+}
+
 // Mostrar usuario logueado
 const usuario = JSON.parse(localStorage.getItem("usuario"));
 const usuarioDiv = document.getElementById("usuarioLogueado");
@@ -82,4 +89,36 @@ document.getElementById("formArticulo").addEventListener("submit", async (e) => 
     alert("Error al conectar con el servidor.");
   }
 });
-  
+
+async function eliminarArticulo(id) {
+  const token = localStorage.getItem("token"); // Asegúrate de guardar el token aquí cuando inicias sesión
+
+  if (!token) {
+    alert("No estás autenticado.");
+    return;
+  }
+
+  const confirmacion = confirm("¿Estás seguro de que deseas eliminar este artículo?");
+  if (!confirmacion) return;
+
+  try {
+    const res = await fetch(`/api/articulo/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const data = await res.json();
+    alert(data.mensaje || data.error);
+
+    if (res.ok) {
+      // Puedes actualizar la vista o redirigir
+      window.location.reload(); // O window.location.href = 'panel.html';
+    }
+
+  } catch (err) {
+    console.error("Error al eliminar artículo:", err);
+    alert("No se pudo eliminar el artículo.");
+  }
+}

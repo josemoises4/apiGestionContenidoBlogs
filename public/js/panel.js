@@ -1,3 +1,11 @@
+// Redireccionar al login si no hay usuario logueado
+const usuarioLogueado = JSON.parse(localStorage.getItem("usuario"));
+if (!usuarioLogueado || !usuarioLogueado._id) {
+  alert("Acceso no autorizado. Redirigiendo al login...");
+  window.location.href = "login.html"; // o la ruta correcta según tu estructura
+}
+
+//Mostrar usuario logueado
 window.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   const usuarioDiv = document.getElementById("usuarioLogueado");
@@ -8,6 +16,15 @@ window.addEventListener("DOMContentLoaded", () => {
     usuarioDiv.textContent = "Usuario no identificado";
   }
 });
+
+// Cerrar sesión
+const cerrarSesionBtn = document.getElementById("cerrarSesion");
+if (cerrarSesionBtn) {
+  cerrarSesionBtn.addEventListener("click", () => {
+    localStorage.removeItem("usuario");
+    window.location.href = "login.html"; // o la ruta de tu pantalla principal
+  });
+}
 
 async function cargarArticulos() {
   try {
@@ -28,16 +45,19 @@ async function cargarArticulos() {
     ? `<img src="${a.imagen}" class="post-imagen" alt="Imagen del artículo">`
     : "";
 
-  card.innerHTML = `
-    <div class="post-title">${titulo}</div>
-    ${imagenHTML}
-    <div class="post-content">${contenido}</div>
-    <div class="post-actions">
-      <span class="icon editar" title="Editar">✏️</span>
-      <span class="icon eliminar" title="Eliminar">❌</span>
-      <span class="icon favorito" title="Comentar">💬 <span class="comentario-contador">0</span></span>
-    </div>
-  `;
+card.innerHTML = `
+  <div class="post-title">
+    <a href="/api/articulo/${a._id}" target="_blank" class="enlace-api">${titulo}</a>
+  </div>
+  ${imagenHTML}
+  <div class="post-content">${contenido}</div>
+  <div class="post-actions">
+    <span class="icon editar" title="Editar">✏️</span>
+    <span class="icon eliminar" title="Eliminar">❌</span>
+    <span class="icon favorito" title="Comentar">💬 <span class="comentario-contador">0</span></span>
+  </div>
+`;
+
 
 
         const eliminarBtn = card.querySelector(".eliminar");

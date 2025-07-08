@@ -1,6 +1,13 @@
 const nuevaCatDiv = document.getElementById('nuevaCategoriaDiv');
 const nuevaCatInput = document.getElementById('nuevaCategoria');
 
+// Redireccionar al login si no hay usuario logueado
+const usuarioLogueado = JSON.parse(localStorage.getItem("usuario"));
+if (!usuarioLogueado || !usuarioLogueado._id) {
+  alert("Acceso no autorizado. Redirigiendo al login...");
+  window.location.href = "login.html"; // o la ruta correcta según tu estructura
+}
+
 // Mostrar usuario y cargar categorías como radios
 window.addEventListener('DOMContentLoaded', async () => {
   const usuarioDiv = document.getElementById('usuarioLogueado');

@@ -1,8 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const Usuario = require("../model/Usuario");
+import { Router, RequestHandler } from "express";
+import Usuario from "../model/Usuario";
 
-router.post("/", async (req, res) => {
+const router = Router();
+
+router.post("/", (async (req, res) => {
   const { email, contrasena } = req.body;
 
   try {
@@ -16,6 +17,6 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: "Error del servidor" });
   }
-});
+}) as RequestHandler);
 
-module.exports = router;
+export default router;

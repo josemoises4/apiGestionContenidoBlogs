@@ -17,7 +17,10 @@
     "typescript": "^5.8.3"
   },
   "scripts": {
+    "build": "tsc",
     "start": "ts-node src/server.ts",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "clean": "rm -rf dist && rm -rf public/uploads && mkdir -p public/uploads && echo '🧼 Proyecto limpio y listo'",
+    "serve": "npm run build && node dist/server.js"
   }
 }
